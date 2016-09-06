@@ -1,28 +1,40 @@
-angular.module( 'quoteBook' ).service( 'dataService', function() {
+angular.module( 'quoteBook' ).service( 'dataService', function( $cookies ) {
+
+// code to reset cookies
+// $cookies.remove( 'quotesArray' );
+
+  this.getCookies = function() {
+    quotes = $cookies.getObject( 'quotesArray' );
+  };
+
+  this.setCookies = function() {
+    var expDate = new Date( 2017, 1, 1 );
+    $cookies.putObject( 'quotesArray', quotes, { expires: expDate } );
+  };
+
   this.getData = function() {
+    if ( $cookies.getObject( 'quotesArray' ) ) {
+      this.getCookies();
+    }
     return quotes;
   };
 
   this.addData = function( data ) {
     if ( data.text && data.author ) {
       quotes.unshift( data );
+      this.setCookies();
       return true;
     }
     return false;
   };
 
   this.removeData = function( textToRemove ) {
-    // quotes.forEach( function( index ) {
-    //   if ( quotes[ index ].text === textToRemove ) {
-    //     quotes.splice( index, 1 );
-    //   }
-    // });
     for ( var i = 0; i < quotes.length; i++ ) {
       if ( quotes[ i ].text.toLowerCase() === textToRemove.toLowerCase() ) {
         quotes.splice( i, 1 );
       }
     }
-
+    this.setCookies();
   };
 
   var quotes = [
