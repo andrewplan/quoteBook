@@ -25,6 +25,10 @@ angular.module( 'quoteBook' ).service( 'dataService', function() {
 
   };
 
+  this.getDataFromCookies = function( arr ) {
+    quotes = arr;
+  };
+
   var quotes = [
     {
         text: 'For a songwriter, you don\'t really go to songwriting school; you learn by listening to tunes. And you try to understand them and take them apart and see what they\'re made of, and wonder if you can make one, too.'

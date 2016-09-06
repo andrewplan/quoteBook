@@ -2,24 +2,21 @@ angular.module( 'quoteBook' ).controller( 'mainCtrl', function( $scope, $cookies
 
   // $cookies.remove( 'quotesArray' );
 
-  $scope.quotes = dataService.getData();
-
   $scope.getCookies = function() {
-    $scope.quotes = $cookies.getObject( 'quotesArray' );
-    // console.log( $cookies.getObject( 'quotesArray' ) );
-    // console.log( $scope.quotes );
+    dataService.getDataFromCookies( $cookies.getObject( 'quotesArray' ) );
+    // $scope.quotes = $cookies.getObject( 'quotesArray' );
   };
 
   $scope.setCookies = function() {
     var expDate = new Date( 2017, 1, 1 );
     $cookies.putObject( 'quotesArray', $scope.quotes, { expires: expDate } );
-    // console.log( $cookies.getObject( 'quotesArray' ) );
-    // console.log( $scope.quotes );
   };
 
   if ( $cookies.getObject( 'quotesArray' ) ) {
     $scope.getCookies();
   }
+
+  $scope.quotes = dataService.getData();
 
   $scope.addNewQuote = function( quoteObj ) {
     if ( dataService.addData( quoteObj ) ) {
