@@ -1,0 +1,21 @@
+.quotes-wrapper {
+}
+
+.quote-box {
+  outline: 1px solid gainsboro;
+  margin-top: 1em;
+  padding: 1em;
+  background-color: skyblue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quote-box span:first-child {
+  width: 60%;
+  font-style: italic;
+}
+
+.quote-box button {
+  height: 2em;
+}
